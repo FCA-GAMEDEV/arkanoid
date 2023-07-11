@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Arkanoid</title>
+</head>
+
+<body onLoad="loop()">
+
+<canvas id="myCanvas" width="800" height="600" style="border: 1px solid #000000;">
+</canvas>
+
+	<div class="buttons-container">
+		<button onclick='loginFB()'> LoginFB </button>
+		<button onclick='logoutFB()'> LogoutFB </button>
+		<button onclick='statusFB()'> Status </button>
+	</div>
+
+<script src = "./src/js/graphics.js"></script>
+<script src = "./src/js/keyboardManager.js"></script>
+<script src = "./src/js/gameObject.js"></script>
+<script src = "./src/js/player.js"></script>
+<script src = "./src/js/ball.js"></script>
+<script src = "./src/js/rect.js"></script>
+<script src = "./src/js/rectManager.js"></script>
+<script src = "./src/js/scene.js"></script>
+<script src = "./src/js/opening.js"></script>
+<script src = "./src/js/game.js"></script>
+<script src = "./src/js/congratulations.js"></script>
+<script src = "./src/js/gameOver.js"></script>
+<script src = "./src/js/collisionManager.js"></script>
+<script src = "./src/js/sceneManager.js"></script>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+<script>
+
+	//Facebook
+	window.fbAsyncInit = function() 
+	{
+		FB.init({
+			appId            : '1638076956700090',
+			autoLogAppEvents : true, 
+			xfbml            : true, 
+			version          : 'v17.0'
+		});
+	};
+
+	var fblogged = false;
+	var profileImageLoaded = false;
+	var profileImage = new Image;
+	
+	function loginFB(){
+		
+		FB.login( function(response){
+			console.log(response);
+			if(response.status === 'connected')
+			{
+				fblogged = true;
+				renderProfileImage();
+			}
+
+		}, {scope: 'public_profile, user_birthday, user_photos, user_posts, email'});
+		
+		fblogged = true;		
+	}
+	
+	function logoutFB(){
+		FB.logout(function(response){
+			console.log(response);
+		});
+	}
+	
+	function statusFB(){
+		FB.getLoginStatus(function(response){
+			console.log(response);
+		});
+	}
+
+	function renderProfileImage(){
+			FB.api('/me', {fields: 'picture.type(normal)'}, function(response){
+        		console.log(response);
+				if(response.status === 'connected')
+				{
+					profileImageLoaded = true;
+				}
+
+				profileImage.onload = function(){
+					graphics.ctx.drawImage(profileImage, 650, 500);
+				};
+				profileImage.src = response['picture']['data']['url'];
+        	});
+		}	
+		
+	// Game Loop
+	function loop()
+	{
+		sceneManager.update();
+		sceneManager.draw();
+		
+		graphics.ctx.drawImage(profileImage, 690, 490);
+		
+		setTimeout(loop, 16);
+	}		
+	
+</script>
+
+</body>
+
+</html>

@@ -86,7 +86,7 @@
 				}
 
 				profileImage.onload = function(){
-					graphics.ctx.drawImage(profileImage, 10, 540, 50, 50);
+					//graphics.ctx.drawImage(profileImage, 10, 540, 50, 50);
 				};
 				profileImage.src = response['picture']['data']['url'];
         	});
@@ -99,7 +99,7 @@
 		sceneManager.draw();
 		
 		if (fblogged)
-			graphics.ctx.drawImage(profileImage, 690, 490);
+			graphics.ctx.drawImage(profileImage, 10, 540, 50, 50);
 		
 		setTimeout(loop, 16);
 	}		

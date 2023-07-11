@@ -25,6 +25,7 @@ const KeyboardManager = function()
 	{
 		switch (e.keyCode)
 		{
+			/*
 			case 13:
 				switch (sceneManager.currentScene)
 				{
@@ -43,7 +44,8 @@ const KeyboardManager = function()
 						break;
 				}
 				break;			
-				
+			*/
+			
 			case 37:
 				if (sceneManager.currentScene == "game")
 				{

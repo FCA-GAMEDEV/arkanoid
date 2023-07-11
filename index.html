@@ -17,6 +17,7 @@
 
 <script src = "./src/js/graphics.js"></script>
 <script src = "./src/js/keyboardManager.js"></script>
+<script src = "./src/js/mouseManager.js"></script>
 <script src = "./src/js/gameObject.js"></script>
 <script src = "./src/js/player.js"></script>
 <script src = "./src/js/ball.js"></script>
@@ -35,62 +36,86 @@
 <script>
 
 	//Facebook
+	let fb_logged = false;
+	let fb_imageLoaded = false;
+	let fb_image = new Image;
+	
 	window.fbAsyncInit = function() 
 	{
-		FB.init({
-			appId            : '1638076956700090',
-			autoLogAppEvents : true, 
-			xfbml            : true, 
-			version          : 'v17.0'
-		});
-	};
-
-	var fblogged = false;
-	var profileImageLoaded = false;
-	var profileImage = new Image;
-	
-	function loginFB(){
-		
-		FB.login( function(response){
-			console.log(response);
-			if(response.status === 'connected')
+		FB.init(
 			{
-				fblogged = true;
-				renderProfileImage();
+				appId            : '1638076956700090',
+				autoLogAppEvents : true, 
+				xfbml            : true, 
+				version          : 'v17.0'
 			}
-
-		}, {scope: 'public_profile, user_birthday, user_photos, user_posts, email'});
-		
-		fblogged = true;		
-	}
+		);
+	};
 	
-	function logoutFB(){
-		FB.logout(function(response){
-			console.log(response);
-			fblogged = false;
-		});
-	}
-	
-	function statusFB(){
-		FB.getLoginStatus(function(response){
-			console.log(response);
-		});
-	}
-
-	function renderProfileImage(){
-			FB.api('/me', {fields: 'picture.type(normal)'}, function(response){
-        		console.log(response);
+	function loginFB()
+	{		
+		FB.login(
+			function(response)
+			{
+				console.log(response);
 				if(response.status === 'connected')
 				{
-					profileImageLoaded = true;
+					fb_logged = true;
+					drawProfileImage();
 				}
 
-				profileImage.onload = function(){
-					//graphics.ctx.drawImage(profileImage, 10, 540, 50, 50);
+			}, 
+			{
+				scope: 'public_profile',
+			}
+		);
+		
+		fb_logged = true;		
+	}
+	
+	function logoutFB()
+	{
+		FB.logout(
+			function(response)
+			{
+				console.log(response);
+				fb_logged = false;
+			}
+		);
+	}
+	
+	function statusFB()
+	{
+		FB.getLoginStatus(
+			function(response)
+			{
+				console.log(response);
+			}
+		);
+	}
+
+	function drawProfileImage()
+	{
+		FB.api('/me', 
+			{
+				fields: 'picture.type(normal)'
+			}, 
+			function(response)
+			{
+				console.log(response);
+				if(response.status === 'connected')
+				{
+					fb_imageLoaded = true;
+				}
+				
+				fb_imageLoaded.onload = function()
+				{
+					context.drawImage(fb_image, 650, 500);
 				};
-				profileImage.src = response['picture']['data']['url'];
-        	});
-		}	
+				fb_image.src = response['picture']['data']['url'];				
+			}
+		);
+	}	
 		
 	// Game Loop
 	function loop()
@@ -98,8 +123,10 @@
 		sceneManager.update();
 		sceneManager.draw();
 		
-		if (fblogged)
-			graphics.ctx.drawImage(profileImage, 10, 540, 50, 50);
+		if (fb_logged)
+		{
+			graphics.ctx.drawImage(fb_image, 10, 540, 50, 50);
+		}
 		
 		setTimeout(loop, 16);
 	}		

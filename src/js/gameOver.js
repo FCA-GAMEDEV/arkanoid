@@ -1,8 +1,14 @@
 
 const GameOver = function()
 {
+	this.count = 0;
+		
 	this.update = function()
 	{
+		if (this.count++ > 250)
+		{
+			sceneManager.changeScene(1);
+		}	
 	}
 	
 	this.draw = function()
@@ -11,6 +17,9 @@ const GameOver = function()
 		
 		graphics.drawRect(0,0,graphics.canvas.width,graphics.canvas.height,"red");
 	
-		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");		
+		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");	
+
+		graphics.drawText("GOver: " + this.count, 10, 10, "20px Arial", "black");
+		
 	}
 }

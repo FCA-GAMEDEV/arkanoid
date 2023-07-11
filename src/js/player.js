@@ -29,6 +29,20 @@ const Player = function(x,y,w,h)
 		{
 			this.go.x += this.speedx;
 		}
+		
+		if (sceneManager.mousePress == true)
+		{
+			console.log("teste");
+			
+			if (sceneManager.mouseX < graphics.canvas.width / 2)
+			{
+				this.go.x -= this.speedx;
+			}
+			else
+			{
+				this.go.x += this.speedx;				
+			}
+		}
 	}
 	
 	this.draw = function()

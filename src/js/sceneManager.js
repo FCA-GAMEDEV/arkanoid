@@ -7,6 +7,9 @@ const SceneManager = function()
 	this.keyLeft = false;
 	this.keyRight = false;
 	
+	this.mouseX = 0;
+	this.mousePress = false;
+	
 	this.currentLevel = 1;
 	this.MAX_LEVEL = 8;
 	

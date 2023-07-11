@@ -31,9 +31,7 @@ const Player = function(x,y,w,h)
 		}
 		
 		if (sceneManager.mousePress == true)
-		{
-			console.log("teste");
-			
+		{			
 			if (sceneManager.mouseX < graphics.canvas.width / 2)
 			{
 				this.go.x -= this.speedx;

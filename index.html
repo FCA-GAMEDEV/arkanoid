@@ -7,14 +7,14 @@
 
 <body onLoad="loop()">
 
-<canvas id="myCanvas" width="800" height="600" style="border: 1px solid #000000;">
-</canvas>
-
 	<div class="buttons-container">
 		<button onclick='loginFB()'> LoginFB </button>
 		<button onclick='logoutFB()'> LogoutFB </button>
 		<button onclick='statusFB()'> Status </button>
 	</div>
+
+<canvas id="myCanvas" width="800" height="600" style="border: 1px solid #000000;">
+</canvas>
 
 <script src = "./src/js/graphics.js"></script>
 <script src = "./src/js/keyboardManager.js"></script>
@@ -68,6 +68,7 @@
 	function logoutFB(){
 		FB.logout(function(response){
 			console.log(response);
+			fblogged = false;
 		});
 	}
 	
@@ -98,7 +99,8 @@
 		sceneManager.update();
 		sceneManager.draw();
 		
-		graphics.ctx.drawImage(profileImage, 690, 490);
+		if (fblogged)
+			graphics.ctx.drawImage(profileImage, 690, 490);
 		
 		setTimeout(loop, 16);
 	}		

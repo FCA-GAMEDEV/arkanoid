@@ -17,9 +17,6 @@ const GameOver = function()
 		
 		graphics.drawRect(0,0,graphics.canvas.width,graphics.canvas.height,"red");
 	
-		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");	
-
-		graphics.drawText("GOver: " + this.count, 10, 10, "20px Arial", "black");
-		
+		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");		
 	}
 }

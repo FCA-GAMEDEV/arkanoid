@@ -1,36 +1,33 @@
+import { GameObject } from "./gameObject.js";
+import { graphics } from "./graphics.js";
 
-const Ball = function(x,y,w,h)
-{
-	this.go = new GameObject(x,y,w,h);
-	
-	this.speedx = 5;
-	this.speedy = -5;
-	
-	this.speedRot = 5;
-	this.angle = 0;
-	
-	this.getInfo = function()
-	{
-		this.go.getInfo("ball");
+// Em TypeScript: class Ball extends GameObject
+export class Ball extends GameObject {
+	constructor(x, y, w, h) {
+		super(x, y, w, h); // Inicializa a classe base (GameObject)
+		this.speedx = 5;
+		this.speedy = -5;
+		this.speedRot = 5;
+		this.angle = 0;
 	}
-	
-	this.update = function()
-	{
-		this.go.x += this.speedx;
-		this.go.y += this.speedy;		
-		
+
+	getInfo() {
+		super.getInfo("ball"); // Chama o método da classe base
+	}
+
+	update() {
+		this.x += this.speedx;
+		this.y += this.speedy;
 		this.angle += this.speedRot;
 	}
-	
-	this.draw = function()
-	{
+
+	draw() {
 		graphics.ctx.save();
-		
-		graphics.ctx.translate(this.go.x,this.go.y);
+		graphics.ctx.translate(this.x, this.y);
 		graphics.ctx.rotate(this.angle * Math.PI / 180);
-		graphics.drawCircle(0,0,this.go.w,0,Math.PI,"lightgray");
-		graphics.drawCircle(0,0,this.go.w,Math.PI,Math.PI*2,"brown");
-	
+		// this.w representa o raio da bola
+		graphics.drawCircle(0, 0, this.w, 0, Math.PI, "lightgray");
+		graphics.drawCircle(0, 0, this.w, Math.PI, Math.PI * 2, "brown");
 		graphics.ctx.restore();
 	}
 }

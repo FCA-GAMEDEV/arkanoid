@@ -1,54 +1,43 @@
+import { Opening } from "./opening.js";
+import { Game } from "./game.js";
+import { Congrats } from "./congratulations.js";
+import { GameOver } from "./gameOver.js";
 
-const SceneManager = function()
-{
-	this.currentScene;
-	this.scene;
-	
-	this.keyLeft = false;
-	this.keyRight = false;
-	
-	this.mouseX = 0;
-	this.mousePress = false;
-	
-	this.currentLevel = 1;
-	this.MAX_LEVEL = 8;
-	
-	this.setup = function()
-	{
+export class SceneManager {
+	constructor() {
+		this.currentScene = null;
+		this.scene = null;
+		this.currentLevel = 1;
+		this.MAX_LEVEL = 8;
+	}
+
+	setup() {
 		this.scene = new Opening();
 		this.currentScene = "opening";
 	}
 
-	this.update = function()
-	{
+	update() {
 		this.scene.update();
 	}
-	
-	this.draw = function()
-	{
+
+	draw() {
 		this.scene.draw();
 	}
-	
-	this.changeScene = function(option)
-	{
-		switch(this.currentScene)
-		{
+
+	changeScene(option) {
+		switch (this.currentScene) {
 			case "opening":
 				this.scene = new Game(this.currentLevel++);
 				this.currentScene = "game";
 				break;
 				
 			case "game":
-				switch (option)
-				{
+				switch (option) {
 					case 0:
-						if (this.currentLevel <= this.MAX_LEVEL)
-						{
+						if (this.currentLevel <= this.MAX_LEVEL) {
 							this.scene = new Game(this.currentLevel++);
 							this.currentScene = "game";
-						}
-						else
-						{
+						} else {
 							this.currentLevel = 1;
 							this.scene = new Congrats();
 							this.currentScene = "congrats";
@@ -79,6 +68,5 @@ const SceneManager = function()
 	}
 }
 
-const sceneManager = new SceneManager();
+export const sceneManager = new SceneManager();
 sceneManager.setup();
-	

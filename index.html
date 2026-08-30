@@ -5,7 +5,7 @@
 <title>Arkanoid</title>
 </head>
 
-<body onLoad="loop()">
+<body>
 
 	<div class="buttons-container">
 		<button onclick='loginFB()'> Login Facebook </button>
@@ -15,21 +15,7 @@
 <canvas id="myCanvas" width="800" height="600" style="border: 1px solid #000000;">
 </canvas>
 
-<script src = "./src/js/graphics.js"></script>
-<script src = "./src/js/keyboardManager.js"></script>
-<script src = "./src/js/mouseManager.js"></script>
-<script src = "./src/js/gameObject.js"></script>
-<script src = "./src/js/player.js"></script>
-<script src = "./src/js/ball.js"></script>
-<script src = "./src/js/rect.js"></script>
-<script src = "./src/js/rectManager.js"></script>
-<script src = "./src/js/scene.js"></script>
-<script src = "./src/js/opening.js"></script>
-<script src = "./src/js/game.js"></script>
-<script src = "./src/js/congratulations.js"></script>
-<script src = "./src/js/gameOver.js"></script>
-<script src = "./src/js/collisionManager.js"></script>
-<script src = "./src/js/sceneManager.js"></script>
+<script type="module" src="./src/js/main.js"></script>
 
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
@@ -116,20 +102,6 @@
 			}
 		);
 	}	
-		
-	// Game Loop
-	function loop()
-	{
-		sceneManager.update();
-		sceneManager.draw();
-		
-		if (fb_logged)
-		{
-			graphics.ctx.drawImage(fb_image, 10, 540, 50, 50);
-		}
-		
-		setTimeout(loop, 16);
-	}		
 	
 </script>
 

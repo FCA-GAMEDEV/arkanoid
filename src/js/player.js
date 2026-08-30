@@ -1,55 +1,44 @@
+import { GameObject } from "./gameObject.js";
+import { input } from "./input.js";
+import { graphics } from "./graphics.js";
 
-const Player = function(x,y,w,h)
-{
-	this.go = new GameObject(x,y,w,h);
-	
-	this.speedx = 10;
-	this.speedy = 10;
-	
-	this.getInfo = function()
-	{
-		this.go.getInfo("player");
+// Em TypeScript: class Player extends GameObject
+export class Player extends GameObject {
+	constructor(x, y, w, h) {
+		super(x, y, w, h); // Inicializa a classe base (GameObject)
+		this.speedx = 10;
+		this.speedy = 10;
 	}
-	
-	/*
-	this.ia = function(ball)
-	{
-		this.go.x = ball.go.x - (this.go.w/2);
+
+	getInfo() {
+		super.getInfo("player"); // Chama o método da classe base
 	}
-	*/
-	
-	this.update = function()
-	{		
-		if (sceneManager.keyLeft == true)
-		{
-			this.go.x -= this.speedx;
+
+	update() {
+		if (input.isKeyDown("ArrowLeft")) {
+			this.x -= this.speedx;
 		}
 
-		if (sceneManager.keyRight == true)
-		{
-			this.go.x += this.speedx;
+		if (input.isKeyDown("ArrowRight")) {
+			this.x += this.speedx;
 		}
-		
-		if (sceneManager.mousePress == true)
-		{			
-			if (sceneManager.mouseX < graphics.canvas.width / 2)
-			{
-				this.go.x -= this.speedx;
-			}
-			else
-			{
-				this.go.x += this.speedx;				
+
+		/*
+		if (input.mousePress === true) {
+			if (input.mouseX < graphics.canvas.width / 2) {
+				this.x -= this.speedx;
+			} else {
+				this.x += this.speedx;
 			}
 		}
+		*/
 	}
-	
-	this.draw = function()
-	{
-		graphics.ctx.save();		
-		
-		graphics.ctx.translate(this.go.x, this.go.y);
-		graphics.drawRect(0,0,this.go.w,this.go.h,"orange");
-		
+
+	draw() {
+		graphics.ctx.save();
+		// Agora usamos this.x e this.y diretamente por causa da herança!
+		graphics.ctx.translate(this.x, this.y);
+		graphics.drawRect(0, 0, this.w, this.h, "orange");
 		graphics.ctx.restore();
 	}
 }

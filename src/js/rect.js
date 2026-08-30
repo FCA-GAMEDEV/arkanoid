@@ -1,26 +1,25 @@
+import { GameObject } from "./gameObject.js";
+import { graphics } from "./graphics.js";
 
-const Rect = function(x,y,w,h,color)
-{
-	this.go = new GameObject(x,y,w,h);
-	
-	this.color = color;
-	
-	this.getInfo = function()
-	{
-		this.go.getInfo("rect");
+// Em TypeScript: class Rect extends GameObject
+export class Rect extends GameObject {
+	constructor(x, y, w, h, color) {
+		super(x, y, w, h); // Inicializa a classe base (GameObject)
+		this.color = color;
 	}
-	
-	this.update = function()
-	{		
+
+	getInfo() {
+		super.getInfo("rect"); // Chama o método da classe base
 	}
-	
-	this.draw = function()
-	{
-		graphics.ctx.save();		
-		
-		graphics.ctx.translate(this.go.x, this.go.y);
-		graphics.drawRect(0,0,this.go.w,this.go.h,this.color);
-		
+
+	update() {
+		// Bloco estático, nenhuma lógica de atualização por enquanto
+	}
+
+	draw() {
+		graphics.ctx.save();
+		graphics.ctx.translate(this.x, this.y);
+		graphics.drawRect(0, 0, this.w, this.h, this.color);
 		graphics.ctx.restore();
 	}
 }

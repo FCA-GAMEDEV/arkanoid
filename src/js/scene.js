@@ -1,6 +1,23 @@
+// Em TypeScript, esta seria uma classe abstrata (abstract class Scene).
+// Todas as cenas do jogo (Opening, Game, Congrats, GameOver) herdam dela.
+//
+// Exemplo em TypeScript:
+// abstract class Scene {
+//     abstract update(): void;
+//     abstract draw(): void;
+// }
 
-const Scene = function()
-{
-	this.update = function(){console.log("update: only example!");}
-	this.draw   = function(){console.log("draw: only example!");  }
+export class Scene {
+	constructor() {
+		// Construtor vazio na classe base
+	}
+
+	// Métodos que as cenas filhas devem obrigatoriamente implementar (sobrescrever)
+	update() {
+		console.log("update: somente um exemplo!");
+	}
+
+	draw() {
+		console.log("draw: somente um exemplo!");
+	}
 }

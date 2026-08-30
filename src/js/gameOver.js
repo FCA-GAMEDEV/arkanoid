@@ -1,22 +1,23 @@
+import { Scene } from "./scene.js";
+import { sceneManager } from "./sceneManager.js";
+import { graphics } from "./graphics.js";
 
-const GameOver = function()
-{
-	this.count = 0;
-		
-	this.update = function()
-	{
-		if (this.count++ > 250)
-		{
-			sceneManager.changeScene(1);
-		}	
+// Em TypeScript: class GameOver extends Scene
+export class GameOver extends Scene {
+	constructor() {
+		super(); // Inicializa a classe base (Scene)
+		this.count = 0;
 	}
-	
-	this.draw = function()
-	{
+
+	update() {
+		if (this.count++ > 250) {
+			sceneManager.changeScene(1);
+		}
+	}
+
+	draw() {
 		graphics.clear();
-		
-		graphics.drawRect(0,0,graphics.canvas.width,graphics.canvas.height,"red");
-	
-		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");		
+		graphics.drawRect(0, 0, graphics.canvas.width, graphics.canvas.height, "red");
+		graphics.drawText("GAME OVER", 100, 300, "100px Arial", "black");
 	}
 }

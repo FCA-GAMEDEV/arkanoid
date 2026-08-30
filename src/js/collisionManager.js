@@ -1,62 +1,45 @@
+import { graphics } from "./graphics.js";
+import { sceneManager } from "./sceneManager.js";
 
-const CollisionManager = function()
-{
-	this.ball_vs_screen = function(ball)
-	{
-		if (ball.go.x - ball.go.w < 0)
-		{	
-			ball.go.x = ball.go.w;
+export class CollisionManager {
+	ball_vs_screen(ball) {
+		if (ball.x - ball.w < 0) {	
+			ball.x = ball.w;
 			ball.speedx *= -1;
 			ball.speedRot *= -1;
-		}
-		else if (ball.go.x + ball.go.w > graphics.canvas.width)
-		{	
-			ball.go.x = graphics.canvas.width - ball.go.w;
+		} else if (ball.x + ball.w > graphics.canvas.width) {	
+			ball.x = graphics.canvas.width - ball.w;
 			ball.speedx *= -1;
 			ball.speedRot *= -1;
 		}
 			
-		if (ball.go.y - ball.go.w < 0)
-		{
-			ball.go.y = ball.go.w;
+		if (ball.y - ball.w < 0) {
+			ball.y = ball.w;
 			ball.speedy *= -1;
 			ball.speedRot *= -1;
-		}
-		else if (ball.go.y - ball.go.w > graphics.canvas.height)
-		{
+		} else if (ball.y - ball.w > graphics.canvas.height) {
 			sceneManager.changeScene(1);
 		}
 	}
 	
-	this.player_vs_screen = function(player)
-	{
-		if (player.go.x < 0)
-		{	
-			player.go.x = 0;
-		}
-		else if (player.go.x + player.go.w > graphics.canvas.width)
-		{	
-			player.go.x = graphics.canvas.width - player.go.w;
+	player_vs_screen(player) {
+		if (player.x < 0) {	
+			player.x = 0;
+		} else if (player.x + player.w > graphics.canvas.width) {	
+			player.x = graphics.canvas.width - player.w;
 		}
 	}	
 	
-	this.ball_vs_player = function(ball, player)
-	{
-		if (ball.go.y < player.go.y + player.go.h)
-		{
-			if (ball.go.x - ball.go.w < player.go.x + player.go.w &&
-				ball.go.x + ball.go.w > player.go.x &&
-				ball.go.y - ball.go.w < player.go.y + player.go.w &&
-				ball.go.y + ball.go.w > player.go.y)
-			{
-				if (ball.go.x < player.go.x &&
-					ball.speedx > 0)
-				{
+	ball_vs_player(ball, player) {
+		if (ball.y < player.y + player.h) {
+			if (ball.x - ball.w < player.x + player.w &&
+				ball.x + ball.w > player.x &&
+				ball.y - ball.w < player.y + player.h &&
+				ball.y + ball.w > player.y) {
+				
+				if (ball.x < player.x && ball.speedx > 0) {
 					ball.speedx *= -1;
-				}			
-				else if (ball.go.x > player.go.x + player.go.w &&
-					ball.speedx < 0)
-				{
+				} else if (ball.x > player.x + player.w && ball.speedx < 0) {
 					ball.speedx *= -1;
 				}			
 				
@@ -66,25 +49,21 @@ const CollisionManager = function()
 		}
 	}
 	
-	this.ball_vs_rects = function(ball, rects)
-	{
-		//console.log("teste: " + rects.length);
-		
-		for (let i = 0; i < rects.length; i++)
-		{
-			if (ball.go.x - ball.go.w < rects[i].go.x + rects[i].go.w &&
-				ball.go.x + ball.go.w > rects[i].go.x &&
-				ball.go.y - ball.go.w < rects[i].go.y + rects[i].go.w &&
-				ball.go.y + ball.go.w > rects[i].go.y)
-			{
+	ball_vs_rects(ball, rects) {
+		for (let i = 0; i < rects.length; i++) {
+			if (ball.x - ball.w < rects[i].x + rects[i].w &&
+				ball.x + ball.w > rects[i].x &&
+				ball.y - ball.w < rects[i].y + rects[i].h &&
+				ball.y + ball.w > rects[i].y) {
+				
 				ball.speedy *= -1;
 				ball.speedRot *= -1;
 				
-				rects.splice(i,1);
+				rects.splice(i, 1);
 				break;
 			}
 		}
 	}	
 }
 
-const collisionManager = new CollisionManager();
+export const collisionManager = new CollisionManager();

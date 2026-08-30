@@ -1,8 +1,8 @@
-# Arkanoid JS (Educativo)
+# Arkanoid
 
 Uma versão minimalista e moderna do clássico jogo **Arkanoid** desenvolvida em **HTML5 e JavaScript Puro (ES6)**. 
 
-Este projeto foi reestruturado com foco pedagógico para servir de introdução à lógica de programação de jogos e à Programação Orientada a Objetos (POO) para alunos do Ensino Médio/Técnico (como os do NAVE), oferecendo um paralelo direto com os conceitos usados em C# com XNA/MonoGame.
+Este projeto foi reestruturado com foco pedagógico para servir de introdução à lógica de programação de jogos e à Programação Orientada a Objetos (POO) para alunos iniciantes, oferecendo um paralelo direto com os conceitos usados em C# com XNA/MonoGame.
 
 ![Arkanoid JS Gameplay](./screenshotlevel04.png)
 

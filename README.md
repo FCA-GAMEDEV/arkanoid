@@ -1,6 +1,6 @@
 # Arkanoid
 
-Uma versão minimalista e moderna do clássico jogo **Arkanoid** desenvolvida em **HTML5 e JavaScript Puro (ES6)**. 
+Uma versão minimalista e moderna do clássico jogo **Arkanoid** desenvolvida em **HTML5 e JavaScript Puro (ES6)**. O projeto apresenta integração prática com o **Facebook SDK** para login e exibição dinâmica da foto de perfil do usuário.
 
 Este projeto foi reestruturado com foco pedagógico para servir de introdução à lógica de programação de jogos e à Programação Orientada a Objetos (POO) para alunos iniciantes, oferecendo um paralelo direto com os conceitos usados em C# com XNA/MonoGame.
 
@@ -86,3 +86,9 @@ Este repositório foi construído para servir de base em sala de aula, ensinando
         ├── gameOver.js        # Cena de derrota (herda de Scene)
         └── collisionManager.js# Gerenciador das regras físicas e colisões do jogo
 ```
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença [MIT](./LICENSE).
